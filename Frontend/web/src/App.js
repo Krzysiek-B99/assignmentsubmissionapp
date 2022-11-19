@@ -1,12 +1,15 @@
 import './App.css';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useLocalState } from './util/useLocalStorage';
 
 function App() {
-  const [jwt, setJwt] = useState("");
+  const [jwt, setJwt] = useLocalState("","jwt");
 
+  
   useEffect(() => {
+    if (!jwt){
     const reqBody = {
-      username:"test",
+      username:"tesssst",
       password:"test",
     };
 
@@ -21,6 +24,7 @@ function App() {
     .then(([body,headers]) => {
       setJwt(headers.get("authorization"));
     });
+  }
   },[]);
   
   useEffect(() => {
