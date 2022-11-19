@@ -1,15 +1,17 @@
 import './App.css';
 import React, { useEffect } from 'react'
 import { useLocalState } from './util/useLocalStorage';
+import { Routes, Route } from "react-router-dom";
+import Dashboard from './Dashboard';
+import Homepage from './Homepage';
 
 function App() {
   const [jwt, setJwt] = useLocalState("","jwt");
 
-  
   useEffect(() => {
     if (!jwt){
     const reqBody = {
-      username:"tesssst",
+      username:"test",
       password:"test",
     };
 
@@ -29,16 +31,17 @@ function App() {
   
   useEffect(() => {
     console.log(`JWT is ${jwt}`);
-  },[jwt])
+  },[jwt]);
 
   return (
-    <div className="App">
-      <h1>Hello world</h1>
-      <div>
-        JWT Value is {jwt}
-      </div>
-    </div>
+
+    <Routes>
+      <Route path ="/dashboard" element={<Dashboard />}/>
+      <Route path="/" element={<Homepage/>} />
+
+    </Routes>
   );
+
 }
 
 export default App;
