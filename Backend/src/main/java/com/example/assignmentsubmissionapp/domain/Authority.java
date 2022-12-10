@@ -12,7 +12,7 @@ public class Authority implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String authority;
-    @ManyToOne
+    @ManyToOne (optional = false)
     private User user;
 
     public Authority() {
