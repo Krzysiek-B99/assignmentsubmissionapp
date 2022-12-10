@@ -6,6 +6,7 @@ import com.example.assignmentsubmissionapp.repository.AssignmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -22,5 +23,9 @@ public class AssignmentService {
     }
     public Set<Assignment> findByUser(User user){
         return  assignmentRepository.findByUser(user);
+    }
+
+    public Optional<Assignment> findById(Long assignmentId) {
+        return assignmentRepository.findById(assignmentId);
     }
 }

@@ -7,11 +7,9 @@ import com.example.assignmentsubmissionapp.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -34,5 +32,10 @@ public class AssignmentController {
     public ResponseEntity<?> getAssignments (@AuthenticationPrincipal User user){
         Set<Assignment> assignmentsByUser = assignmentService.findByUser(user);
         return ResponseEntity.ok(assignmentsByUser);
+    }
+    @GetMapping("{assignmentId}")
+    public ResponseEntity<?> getAssignments (@PathVariable Long assignmentId, @AuthenticationPrincipal User user){
+        Optional<Assignment> assignmentOpt = assignmentService.findById(assignmentId);
+        return ResponseEntity.ok(assignmentOpt.orElse(new Assignment()));
     }
 }
