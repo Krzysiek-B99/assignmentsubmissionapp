@@ -6,6 +6,8 @@ import com.example.assignmentsubmissionapp.repository.AssignmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class AssignmentService {
 
@@ -17,5 +19,8 @@ public class AssignmentService {
         assignment.setStatus("Needs to be submitted");
         assignment.setUser(user);
          return assignmentRepository.save(assignment);
+    }
+    public Set<Assignment> findByUser(User user){
+        return  assignmentRepository.findByUser(user);
     }
 }
